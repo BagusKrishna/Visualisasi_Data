@@ -13,6 +13,8 @@ Proyek ini ditujukan untuk pemenuhan tugas besar matakuliah Visualisasi Data, S1
 **Pacific Food and Beverage Trade Data Visualization (PFTD 2.1)**  
 Aplikasi Streamlit ini memvisualisasikan data perdagangan makanan & minuman di 18 negara/wilayah Pasifik (1995-2018) menggunakan data PFTD 2.1 (HS92). Tujuannya untuk mengidentifikasi pola perdagangan, ketergantungan, tren, dan wawasan untuk keamanan pangan regional.
 
+dataset download : https://drive.google.com/uc?export=download&id=1wuz1IEEQpngIbCtXPgMVev0aYeCd_aGH
+
 ### Fitur:
 - Informasi Kelompok & Deskripsi Proyek  
 - Opsi Pembersihan & Filter Data (Tahun, Komoditas, Importir, Eksportir)  

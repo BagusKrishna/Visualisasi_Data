@@ -36,17 +36,15 @@ With fragmented geographies and limited resources, many Pacific countries rely o
 
 st.markdown("---")
 
-import os # Tambahkan import os di bagian paling atas file
-
 @st.cache_data
 def load_data():
-    """Memuat data dari file lokal dan melakukan pra-pemrosesan awal."""
-    file_path = "Pacific food and beverage trade_ The Pacific Food Trade Database data.csv" # Nama file dataset lokal kamu
-
-    if not os.path.exists(file_path):
-        st.error(f"File data '{file_path}' tidak ditemukan di folder proyek.")
+    """Memuat data dari URL dan melakukan pra-pemrosesan awal."""
+    try:
+        url = "https://drive.google.com/uc?export=download&id=1wuz1IEEQpngIbCtXPgMVev0aYeCd_aGH"
+        df = pd.read_csv(url)
+    except Exception as e:
+        st.error(f"Gagal memuat data dari URL: {e}")
         st.warning("Menggunakan data dummy untuk melanjutkan.")
-        # Data dummy akan tetap digunakan sebagai fallback jika file tidak ditemukan
         dummy_data_dict = {
             'Importer': ['Fiji', 'Kiribati', 'Fiji', 'Vanuatu', 'Samoa', 'Fiji', 'Tuvalu', 'Nauru', 'Palau', 'Micronesia', 'Marshall Islands'],
             'Exporter': ['Australia', 'New Zealand', 'Australia', 'Fiji', 'New Zealand', 'Australia', 'USA', 'China', 'Japan', 'Korea', 'Thailand'],
@@ -58,24 +56,6 @@ def load_data():
             'INDICATOR': ['Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import']
         }
         df = pd.DataFrame(dummy_data_dict)
-    else:
-        try:
-            df = pd.read_csv(file_path)
-            st.success(f"Data berhasil dimuat dari '{file_path}'.")
-        except Exception as e:
-            st.error(f"Gagal memuat data dari file lokal '{file_path}': {e}")
-            st.warning("Menggunakan data dummy untuk melanjutkan.")
-            dummy_data_dict = {
-                'Importer': ['Fiji', 'Kiribati', 'Fiji', 'Vanuatu', 'Samoa', 'Fiji', 'Tuvalu', 'Nauru', 'Palau', 'Micronesia', 'Marshall Islands'],
-                'Exporter': ['Australia', 'New Zealand', 'Australia', 'Fiji', 'New Zealand', 'Australia', 'USA', 'China', 'Japan', 'Korea', 'Thailand'],
-                'COMMODITY': [1001, 2002, 20, 3003, 2002, 2204, 4001, 5002, 6003, 7004, 8005], 
-                'Commodity': ['Sereal (Gandum)', 'Daging (Sapi)', 'Produk Susu', 'Ikan (Segar)', 'Daging (Sapi)', 'Minuman (Anggur)', 'Kopi', 'Teh', 'Rempah', 'Buah', 'Sayur'],
-                'TIME_PERIOD': [1995, 1995, 1996, 1997, 1998, 1995, 1999, 2000, 2001, 2002, 2003],
-                'OBS_VALUE': [100, 200, 150, 50, 250, 300, 120, 130, 140, 160, 170],
-                'UNIT_MEASURE': ['Tonnes', 'Tonnes', 'Tonnes', 'Tonnes', 'Tonnes', 'Litres', 'Tonnes', 'Tonnes', 'Tonnes', 'Tonnes', 'Tonnes'],
-                'INDICATOR': ['Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import', 'Import']
-            }
-            df = pd.DataFrame(dummy_data_dict)
 
     rename_map = {
         "Importer": "importer", "Exporter": "exporter",
@@ -96,7 +76,7 @@ def load_data():
 
     df['year'] = pd.to_numeric(df['year'], errors='coerce')
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
-    df.dropna(subset=['year', 'value'], inplace=True)
+    df.dropna(subset=['year', 'value'], inplace=True)  # Selalu hapus baris dengan data kosong
     df['year'] = df['year'].astype(int)
 
     return df
