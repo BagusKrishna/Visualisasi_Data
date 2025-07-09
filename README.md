@@ -35,13 +35,10 @@ Dari visualisasi ini, kami memperoleh beberapa insight penting, antara lain:
 - Volume impor cenderung meningkat dari tahun ke tahun, mencerminkan peningkatan kebutuhan pangan seiring pertumbuhan penduduk dan ekonomi.
 - Visualisasi interaktif membantu mempermudah pemahaman terhadap kompleksitas data dan memberikan gambaran makro terhadap situasi perdagangan pangan di kawasan ini.
 
-## 📁 Struktur Folder
-
-Visualisasi_Data/
-├── Pacific food and beverage trade_...csv # Dataset utama (PFTD 2.1)
-├── README.md # Dokumentasi proyek
-├── requirements.txt # Daftar dependensi Python
-└── visdat.py # Script utama Streamlit
+## 📂 Isi Repository
+- `visdat.py` – Script utama Streamlit untuk visualisasi data.
+- `requirements.txt` – Daftar dependensi Python yang diperlukan.
+- `README.md` – Penjelasan dan dokumentasi proyek.  
 
 ## 🧰 Instalasi & Menjalankan Aplikasi
 
